@@ -3,21 +3,11 @@
 - 偷看开发者屏幕,若电脑无公网,需要搭配frp使用
 - 支持电脑屏幕、电脑音频以及手机屏幕(Android)
 
-
-
  # 环境
 
 - Python 3
 - 安装依赖: `pip install -r requirements.txt`
-
-```
-configobj
-Flask
-Pillow
-PyAudio
-system-hotkey
-waitres
-```
+  如果您在安装PyAudio时出现错误，请到[这里](https://www.lfd.uci.edu/~gohlke/pythonlibs/#pyaudio)选择您系统对应的版本下载安装。  
 
 - ADB Shell (peek手机屏幕需要)
 

@@ -150,10 +150,11 @@ def s():
     hk2 = SystemHotkey(consumer=on_key)
     hk2.register(("alt", "c"), 1, 2, 3, 4) #切换设备
 
-if __name__ == '__main__':                        #正式部署请使用下面的代码
+if __name__ == '__main__':                        
     s()
-    app.run("127.0.0.1", 1919, debug=True) 
+    app.run("0.0.0.0", 1919, debug=True)
+#正式部署请使用下面的代码
 #if __name__ == "__main__":
 #    s()
 #    from waitress import serve
-#    serve(app, host = "127.0.0.1", port = 1919)
+#    serve(app, host = "0.0.0.0", port = 1919)
