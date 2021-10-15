@@ -1,6 +1,6 @@
 configobj==5.0.6
 Flask==1.0.2
 Pillow==8.2.0
-PyAudio==0.2.11
+pypiwin32
 system-hotkey==1.0.3
 waitress==2.0.0
