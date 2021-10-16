@@ -1,6 +1,10 @@
 configobj==5.0.6
-Flask==1.0.2
-Pillow==8.2.0
-pypiwin32
+Flask>=1.0.2
+Pillow>=8.3.1
+pypiwin32~=223
 system-hotkey==1.0.3
 waitress==2.0.0
+PyAudio~=0.2.11
+future~=0.18.2
+pywin32~=301
+win10toast~=0.9

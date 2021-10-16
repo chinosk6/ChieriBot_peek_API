@@ -13,7 +13,8 @@
 
 # 使用
 
-- 启动: `python run.py`
+- 启动(带命令行): `python run.py`
+- 启动(不带命令行): `pythonw run.py`
 
 ######  - 热键可以在 `run.py`的`s()`函数中自行修改
 
