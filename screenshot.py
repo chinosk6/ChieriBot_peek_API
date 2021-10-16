@@ -36,28 +36,27 @@ def popen(com, is_out = False):
 def get_screen_phone(radius = 2):
     res = os.popen("adb shell \"dumpsys window | grep mCurrentFocus\"")
     now_run = res.read()
-    print(now_run, type(now_run))
+    print(now_run)
     if(("com.tencent.mobileqq" in now_run) and radius != 0): #QQ在前台,模糊度增加
         radius += 3
     if(("com.tencent.mm" in now_run) and radius != 0): #微信在前台,模糊度增加
         radius += 3
+    if(("moe.low.arc" in now_run) and radius != 0): #Arcaea在前台,模糊度减弱
+        if(radius > 0):
+            radius = 0
 
     iname = str(int(time.time() * 1000))
     popen("adb shell /system/bin/screencap -p /sdcard/%s.png" % iname)
     popen("adb pull /sdcard/%s.png ./temp/%s.png" % (iname, iname))
     popen("adb shell rm /sdcard/%s.png" % iname)
 
-    #try:
-    img = Image.open("./temp/%s.png" % iname)
-    img = img.convert("RGB")
-    img = img.filter(ImageFilter.GaussianBlur(radius = radius))
-    imgbyte = io.BytesIO()
-    img.save(imgbyte, format='JPEG')
-    os.remove("./temp/%s.png" % iname)
-    return(imgbyte.getvalue())
-    #except:
-    #    return(screenshot(radius))
-
-
-
-
+    try:
+        img = Image.open("./temp/%s.png" % iname)
+        img = img.convert("RGB")
+        img = img.filter(ImageFilter.GaussianBlur(radius = radius))
+        imgbyte = io.BytesIO()
+        img.save(imgbyte, format='JPEG')
+        os.remove("./temp/%s.png" % iname)
+        return(imgbyte.getvalue())
+    except:
+        return(screenshot(radius))

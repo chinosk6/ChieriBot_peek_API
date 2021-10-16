@@ -90,7 +90,7 @@ def req():
     r = request.args.get("r")
     k = request.args.get("k")
     if(r == None or r == '' ):
-        r = 2.5
+        r = 3
     else:
         r = float(r)
         if(r < 2):
