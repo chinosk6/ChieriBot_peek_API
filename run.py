@@ -86,6 +86,8 @@ def getaud():
 
 @app.route('/check', methods=["GET", "POST"])
 def check():
+    if mst.get_device() != "1":  # 手机接入时无声音
+        return ("noaud", 200)
     return ("ok", 200)
 
 
