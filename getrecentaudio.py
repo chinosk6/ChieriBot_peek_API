@@ -31,7 +31,7 @@ class Recorder():
         return -1
 
     def findInternalRecordingDevice(self, p): #pyaudio要乱码用这个,用之前先运行一次 check_audio_device.py
-        getnum = 读配置项("dev.ini", "setdev", "id", )
+        getnum = readobj("dev.ini", "setdev", "id", )
         return(int(getnum))
  
     # 开始录音，开启一个新线程进行录音操作

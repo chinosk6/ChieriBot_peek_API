@@ -21,20 +21,20 @@ class sstat:
     @staticmethod
     def change_public(para=-1):
 
-        gstat = 读配置项("dev.ini", "basic", "ispublic", "1")  # 1公开,其它私密
+        gstat = readobj("dev.ini", "basic", "ispublic", "1")  # 1公开,其它私密
         if (gstat == "1"):
-            写配置项("dev.ini", "basic", "ispublic", "0")
+            writeobj("dev.ini", "basic", "ispublic", "0")
             print("已设置为私密")
             toast_show(msg="已切换为私密")
 
         else:
-            写配置项("dev.ini", "basic", "ispublic", "1")
+            writeobj("dev.ini", "basic", "ispublic", "1")
             print("已设置为公开")
             toast_show(msg="已切换为公开")
 
     @staticmethod
     def get_is_public(para=-1):
-        gstat = 读配置项("dev.ini", "basic", "ispublic", "1")
+        gstat = readobj("dev.ini", "basic", "ispublic", "1")
         if (gstat == "1"):
             return (True)
         else:
@@ -42,19 +42,19 @@ class sstat:
 
     @staticmethod
     def change_device(para=-1):
-        gstat = 读配置项("dev.ini", "basic", "dev", "1")  # 1pc,2手机
+        gstat = readobj("dev.ini", "basic", "dev", "1")  # 1pc,2手机
         if (gstat == "1"):
-            写配置项("dev.ini", "basic", "dev", "2")
+            writeobj("dev.ini", "basic", "dev", "2")
             print("已切换到手机")
             toast_show(msg="已切换到手机")
         else:
-            写配置项("dev.ini", "basic", "dev", "1")
+            writeobj("dev.ini", "basic", "dev", "1")
             print("已切换到电脑")
             toast_show(msg="已切换到电脑")
 
     @staticmethod
     def get_device(para=-1):
-        gstat = 读配置项("dev.ini", "basic", "dev", "1")
+        gstat = readobj("dev.ini", "basic", "dev", "1")
         return (gstat)
 
 

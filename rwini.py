@@ -1,20 +1,20 @@
 from configobj import ConfigObj  
 
 
-def 读配置项(文件名, 节, 项, 空项返回: str = ''):
-    config = ConfigObj(文件名, encoding='UTF8')  
+def readobj(filename, sect, item, default: str = ''):
+    config = ConfigObj(filename, encoding='UTF8')
     try:
-        res = config[节][项]
+        res = config[sect][item]
     except:
-        res = 空项返回
+        res = default
 
     return(res)
 
-def 写配置项(文件名, 节, 项, 值):
-    config = ConfigObj(文件名, encoding='UTF8')
-    if(节 not in config):
-        config[节] = {}
+def writeobj(filename, sect, item, value):
+    config = ConfigObj(filename, encoding='UTF8')
+    if(sect not in config):
+        config[sect] = {}
 
-    config[节][项] = 值
+    config[sect][item] = value
  
     config.write()

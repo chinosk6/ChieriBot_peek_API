@@ -110,7 +110,7 @@ if __name__ == "__main__":
         print("设备号" + str(num) + "完成录制,请查看效果 - " + "./record/test_" + str(num) + ".wav")
         stat = str(input("设备正确输入y,不正确按任意键"))
         if(stat == 'y'):
-            写配置项("dev.ini", "setdev", "id", str(num))
+            writeobj("dev.ini", "setdev", "id", str(num))
             print("已设置设备号:" + str(num))
             #import sys
             #sys.exit()

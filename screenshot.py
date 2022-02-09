@@ -1,30 +1,38 @@
 import time
 from PIL import ImageGrab
-from PIL import Image,ImageFilter
-import io 
+from PIL import Image, ImageFilter
+import io
 import tkinter as tk
 import os
 import subprocess
 
-def get_p(beilv = 1): #屏幕放大倍率
+import rwini
+
+
+def get_p(beilv=1.0):  # 屏幕放大倍率
     root = tk.Tk()
     wei = root.winfo_screenwidth()
     hig = root.winfo_screenheight()
     root.destroy()
-    return(int(wei*beilv), int(hig*beilv))
+    return (int(wei * beilv), int(hig * beilv))
 
-def screenshot(radius = 2):
-    mypx = get_p(1.25) #屏幕放大倍率,我的电脑是125%
+
+def screenshot(radius=2):
+    gp = rwini.readobj("dev.ini", "screen", "zoom", "")
+    if gp == "":
+        rwini.writeobj("dev.ini", "screen", "zoom", "1.25")
+        gp = 1.25
+    mypx = get_p(gp)  # 屏幕放大倍率,我的电脑是125%
     img = ImageGrab.grab(bbox=(0, 0, mypx[0], mypx[1]))
-    img = img.filter(ImageFilter.GaussianBlur(radius = radius))
+    img = img.filter(ImageFilter.GaussianBlur(radius=radius))
     imgbyte = io.BytesIO()
     img.save(imgbyte, format='JPEG')
-    return(imgbyte.getvalue())
+    return (imgbyte.getvalue())
 
 
-#############下面为手机屏幕获取
+# 下面为手机屏幕获取
 
-def popen(com, is_out = False):
+def popen(com, is_out=False):
     ex = subprocess.Popen(com, stdout=subprocess.PIPE, shell=True)
     out = 'f'
     try:
@@ -33,16 +41,17 @@ def popen(com, is_out = False):
         out = ex.stdout.read().decode("utf-8")
     return out
 
-def get_screen_phone(radius = 2):
+
+def get_screen_phone(radius=2):
     res = os.popen("adb shell \"dumpsys window | grep mCurrentFocus\"")
     now_run = res.read()
     print(now_run)
-    if(("com.tencent.mobileqq" in now_run) and radius != 0): #QQ在前台,模糊度增加
+    if (("com.tencent.mobileqq" in now_run) and radius != 0):  # QQ在前台,模糊度增加
         radius += 3
-    if(("com.tencent.mm" in now_run) and radius != 0): #微信在前台,模糊度增加
+    if (("com.tencent.mm" in now_run) and radius != 0):  # 微信在前台,模糊度增加
         radius += 3
-    if(("moe.low.arc" in now_run) and radius != 0): #Arcaea在前台,模糊度减弱
-        if(radius > 0):
+    if (("moe.low.arc" in now_run) and radius != 0):  # Arcaea在前台,模糊度减弱
+        if (radius > 0):
             radius = 0
 
     iname = str(int(time.time() * 1000))
@@ -53,10 +62,10 @@ def get_screen_phone(radius = 2):
     try:
         img = Image.open("./temp/%s.png" % iname)
         img = img.convert("RGB")
-        img = img.filter(ImageFilter.GaussianBlur(radius = radius))
+        img = img.filter(ImageFilter.GaussianBlur(radius=radius))
         imgbyte = io.BytesIO()
         img.save(imgbyte, format='JPEG')
         os.remove("./temp/%s.png" % iname)
-        return(imgbyte.getvalue())
+        return (imgbyte.getvalue())
     except:
-        return(screenshot(radius))
+        return (screenshot(radius))
