@@ -22,7 +22,7 @@ def screenshot(radius=2):
     if gp == "":
         rwini.writeobj("dev.ini", "screen", "zoom", "1.25")
         gp = 1.25
-    mypx = get_p(gp)  # 屏幕放大倍率,我的电脑是125%
+    mypx = get_p(float(gp))  # 屏幕放大倍率,我的电脑是125%
     img = ImageGrab.grab(bbox=(0, 0, mypx[0], mypx[1]))
     img = img.filter(ImageFilter.GaussianBlur(radius=radius))
     imgbyte = io.BytesIO()
